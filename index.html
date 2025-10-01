@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Griffy&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Eater&family=Griffy&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -17,12 +17,8 @@
             box-sizing: border-box;
         }
 
-        /* SVG Filters for dripping effect */
-        .svg-filters {
-            position: absolute;
-            width: 0;
-            height: 0;
-        }
+        /* Ensure Creepster font loads with fallbacks */
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
 
         body {
             font-family: 'Inter', sans-serif;
@@ -250,106 +246,6 @@
             overflow: hidden;
         }
 
-        .bat {
-            position: absolute;
-            font-size: 30px;
-            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
-            opacity: 0.7;
-        }
-
-        .bat:nth-child(1) { 
-            top: 15%;
-            left: -50px;
-            animation: flyBat1 25s infinite linear;
-            font-size: 25px;
-        }
-        .bat:nth-child(2) { 
-            top: 35%;
-            left: -50px;
-            animation: flyBat2 30s infinite linear;
-            animation-delay: 8s;
-            font-size: 35px;
-        }
-        .bat:nth-child(3) { 
-            top: 55%;
-            left: -50px;
-            animation: flyBat3 22s infinite linear;
-            animation-delay: 15s;
-            font-size: 28px;
-        }
-
-        @keyframes flyBat1 {
-            0% { 
-                transform: translate(0, 0);
-                opacity: 0;
-            }
-            5% {
-                opacity: 0.7;
-            }
-            25% {
-                transform: translate(30vw, -20px);
-            }
-            50% {
-                transform: translate(60vw, 20px);
-            }
-            75% {
-                transform: translate(90vw, -10px);
-            }
-            95% {
-                opacity: 0.7;
-            }
-            100% { 
-                transform: translate(calc(100vw + 100px), 0);
-                opacity: 0;
-            }
-        }
-
-        @keyframes flyBat2 {
-            0% { 
-                transform: translate(0, 0);
-                opacity: 0;
-            }
-            5% {
-                opacity: 0.7;
-            }
-            30% {
-                transform: translate(40vw, 30px);
-            }
-            60% {
-                transform: translate(70vw, -25px);
-            }
-            95% {
-                opacity: 0.7;
-            }
-            100% { 
-                transform: translate(calc(100vw + 100px), 10px);
-                opacity: 0;
-            }
-        }
-
-        @keyframes flyBat3 {
-            0% { 
-                transform: translate(0, 0);
-                opacity: 0;
-            }
-            5% {
-                opacity: 0.7;
-            }
-            35% {
-                transform: translate(45vw, -30px);
-            }
-            70% {
-                transform: translate(80vw, 25px);
-            }
-            95% {
-                opacity: 0.7;
-            }
-            100% { 
-                transform: translate(calc(100vw + 100px), -10px);
-                opacity: 0;
-            }
-        }
-
         .ghost {
             position: absolute;
             font-size: 40px;
@@ -358,22 +254,37 @@
             animation: floatGhost 15s infinite ease-in-out;
         }
 
-        .ghost:nth-child(4) { 
+        .ghost:nth-child(1) { 
             left: 10%; 
             top: 30%;
             animation-delay: 0s;
+            animation-duration: 18s;
         }
-        .ghost:nth-child(5) { 
+        .ghost:nth-child(2) { 
             right: 15%; 
             top: 50%;
             animation-delay: 5s;
-            animation-duration: 18s;
+            animation-duration: 20s;
         }
-        .ghost:nth-child(6) { 
+        .ghost:nth-child(3) { 
             left: 50%; 
             bottom: 20%;
             animation-delay: 10s;
-            animation-duration: 20s;
+            animation-duration: 22s;
+        }
+        .ghost:nth-child(4) { 
+            left: 75%; 
+            top: 20%;
+            animation-delay: 3s;
+            animation-duration: 17s;
+            font-size: 35px;
+        }
+        .ghost:nth-child(5) { 
+            left: 30%; 
+            top: 70%;
+            animation-delay: 8s;
+            animation-duration: 19s;
+            font-size: 45px;
         }
 
         @keyframes floatGhost {
@@ -426,7 +337,7 @@
         .main-logo {
             width: 250px;
             height: 250px;
-            border-radius: 20px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -436,14 +347,14 @@
                 0 0 150px rgba(255, 102, 0, 0.2);
             position: relative;
             overflow: hidden;
-            background: #000;
+            background: radial-gradient(circle at 30% 30%, #ff9933, #ff6600, #cc4400);
         }
 
         .main-logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 20px;
+            border-radius: 50%;
         }
 
         .main-logo::before {
@@ -459,6 +370,7 @@
                 transparent 70%);
             animation: logoShine 3s infinite;
             pointer-events: none;
+            z-index: 1;
         }
 
         @keyframes logoShine {
@@ -467,7 +379,7 @@
         }
 
         h1 {
-            font-family: 'Creepster', cursive;
+            font-family: 'Creepster', 'Nosifer', 'Eater', cursive;
             font-size: 92px;
             margin: 30px 0;
             color: #ff6600;
@@ -482,55 +394,68 @@
                 0 8px 0 #bb1100,
                 0 9px 0 #aa0000,
                 0 10px 0 #990000,
+                0 11px 0 #880000,
+                0 12px 0 #770000,
                 0 0 5px rgba(255, 102, 0, 1),
                 0 0 10px rgba(255, 102, 0, 0.8),
-                0 0 15px rgba(255, 102, 0, 0.6),
-                0 0 20px rgba(255, 102, 0, 0.4),
-                0 0 30px rgba(255, 102, 0, 0.2),
-                0 10px 20px rgba(0, 0, 0, 0.8),
-                0 15px 30px rgba(0, 0, 0, 0.5);
+                0 0 20px rgba(255, 102, 0, 0.6),
+                0 0 30px rgba(255, 102, 0, 0.4),
+                0 0 40px rgba(255, 102, 0, 0.2),
+                0 12px 20px rgba(0, 0, 0, 0.9),
+                0 15px 40px rgba(0, 0, 0, 0.7);
             letter-spacing: 6px;
             text-transform: uppercase;
             animation: titleFlame 2s ease-in-out infinite alternate;
             position: relative;
-            transform: perspective(500px) rotateX(15deg);
-            filter: url(#drip);
-        }
-
-        /* Extra dripping elements */
-        h1::before {
-            content: 'TRICK OR TREAT COIN';
-            position: absolute;
-            top: 0;
-            left: 0;
-            color: #ff6600;
-            text-shadow: 
-                0 1px 0 #ff8833,
-                0 2px 0 #ff7722,
-                0 3px 0 #ff6611,
-                0 4px 0 #ff5500,
-                0 5px 0 #ee4400;
-            opacity: 0.8;
-            animation: dripAnimation 4s infinite;
+            display: inline-block;
+            font-weight: bold;
+            transform: perspective(300px) rotateX(15deg);
+            transform-style: preserve-3d;
         }
 
         @keyframes titleFlame {
             0% { 
-                filter: url(#drip) brightness(1);
-                transform: perspective(500px) rotateX(15deg) translateY(0);
+                text-shadow: 
+                    0 1px 0 #ff8833,
+                    0 2px 0 #ff7722,
+                    0 3px 0 #ff6611,
+                    0 4px 0 #ff5500,
+                    0 5px 0 #ee4400,
+                    0 6px 0 #dd3300,
+                    0 7px 0 #cc2200,
+                    0 8px 0 #bb1100,
+                    0 9px 0 #aa0000,
+                    0 10px 0 #990000,
+                    0 11px 0 #880000,
+                    0 12px 0 #770000,
+                    0 0 5px rgba(255, 102, 0, 1),
+                    0 0 10px rgba(255, 102, 0, 0.8),
+                    0 0 20px rgba(255, 102, 0, 0.6),
+                    0 0 30px rgba(255, 102, 0, 0.4),
+                    0 12px 20px rgba(0, 0, 0, 0.9);
+                transform: perspective(300px) rotateX(15deg) translateY(0);
             }
             100% { 
-                filter: url(#drip) brightness(1.2);
-                transform: perspective(500px) rotateX(15deg) translateY(-2px);
-            }
-        }
-
-        @keyframes dripAnimation {
-            0%, 100% { 
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 95% 102%, 90% 100%, 85% 103%, 80% 100%, 75% 102%, 70% 100%, 65% 101%, 60% 100%, 55% 102%, 50% 100%, 45% 101%, 40% 100%, 35% 102%, 30% 100%, 25% 101%, 20% 100%, 15% 102%, 10% 100%, 5% 101%, 0 100%);
-            }
-            50% { 
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 97% 101%, 92% 100%, 87% 102%, 82% 100%, 77% 101%, 72% 100%, 67% 102%, 62% 100%, 57% 101%, 52% 100%, 47% 102%, 42% 100%, 37% 101%, 32% 100%, 27% 102%, 22% 100%, 17% 101%, 12% 100%, 7% 102%, 0 100%);
+                text-shadow: 
+                    0 1px 0 #ff8833,
+                    0 2px 0 #ff7722,
+                    0 3px 0 #ff6611,
+                    0 4px 0 #ff5500,
+                    0 5px 0 #ee4400,
+                    0 6px 0 #dd3300,
+                    0 7px 0 #cc2200,
+                    0 8px 0 #bb1100,
+                    0 9px 0 #aa0000,
+                    0 10px 0 #990000,
+                    0 11px 0 #880000,
+                    0 12px 0 #770000,
+                    0 13px 0 #660000,
+                    0 0 10px rgba(255, 102, 0, 1),
+                    0 0 20px rgba(255, 102, 0, 0.9),
+                    0 0 35px rgba(255, 102, 0, 0.7),
+                    0 0 50px rgba(255, 102, 0, 0.5),
+                    0 13px 25px rgba(0, 0, 0, 1);
+                transform: perspective(300px) rotateX(15deg) translateY(-3px);
             }
         }
 
@@ -1240,17 +1165,6 @@
     </style>
 </head>
 <body>
-    <!-- SVG Filters for dripping text effect -->
-    <svg class="svg-filters">
-        <defs>
-            <filter id="drip">
-                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="1" result="turbulence" seed="1" />
-                <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="8" xChannelSelector="R" yChannelSelector="G" />
-                <feGaussianBlur stdDeviation="0.5" />
-            </filter>
-        </defs>
-    </svg>
-
     <!-- Complex Spider Web SVGs -->
     <div class="spider-webs">
         <svg class="web web-1" viewBox="0 0 400 400">
@@ -1366,9 +1280,8 @@
 
     <!-- Halloween Creatures -->
     <div class="creatures">
-        <div class="bat">🦇</div>
-        <div class="bat">🦇</div>
-        <div class="bat">🦇</div>
+        <div class="ghost">👻</div>
+        <div class="ghost">👻</div>
         <div class="ghost">👻</div>
         <div class="ghost">👻</div>
         <div class="ghost">👻</div>
