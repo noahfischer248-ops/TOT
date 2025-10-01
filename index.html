@@ -331,7 +331,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 10px auto;
             width: 400px;
             height: 400px;
         }
@@ -407,7 +407,7 @@
         h1 {
             font-family: 'Creepster', 'Nosifer', 'Eater', cursive;
             font-size: 92px;
-            margin: 30px auto;
+            margin: 10px auto 30px auto;
             color: #ff6600;
             text-shadow: 
                 0 1px 0 #ff8833,
@@ -429,6 +429,9 @@
                 0 0 40px rgba(255, 102, 0, 0.2),
                 0 12px 20px rgba(0, 0, 0, 0.9),
                 0 15px 40px rgba(0, 0, 0, 0.7);
+            -webkit-text-stroke: 3px black;
+            text-stroke: 3px black;
+            paint-order: stroke fill;
             letter-spacing: 6px;
             text-transform: uppercase;
             animation: titleFlame 2s ease-in-out infinite alternate;
