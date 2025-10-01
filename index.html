@@ -318,15 +318,23 @@
         /* Header styles */
         header {
             text-align: center;
-            padding: 60px 0 40px;
+            padding: 60px 20px 40px;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo-container {
-            display: inline-block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
             animation: pulse 2s infinite;
-            margin-bottom: 30px;
+            margin: 0 auto 30px auto;
+            width: 250px;
+            height: 250px;
         }
 
         @keyframes pulse {
@@ -348,6 +356,7 @@
             position: relative;
             overflow: hidden;
             background: radial-gradient(circle at 30% 30%, #ff9933, #ff6600, #cc4400);
+            margin: 0 auto;
         }
 
         .main-logo img {
@@ -355,6 +364,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
+            display: block;
         }
 
         .main-logo::before {
@@ -381,7 +391,7 @@
         h1 {
             font-family: 'Creepster', 'Nosifer', 'Eater', cursive;
             font-size: 92px;
-            margin: 30px 0;
+            margin: 30px auto;
             color: #ff6600;
             text-shadow: 
                 0 1px 0 #ff8833,
@@ -407,10 +417,11 @@
             text-transform: uppercase;
             animation: titleFlame 2s ease-in-out infinite alternate;
             position: relative;
-            display: inline-block;
+            display: block;
             font-weight: bold;
             transform: perspective(300px) rotateX(15deg);
             transform-style: preserve-3d;
+            text-align: center;
         }
 
         @keyframes titleFlame {
