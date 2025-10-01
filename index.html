@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$TOT - Trick or Treat Coin | Solana</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Griffy&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* SVG Filters for dripping effect */
+        .svg-filters {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0015;
+            color: #ff6600;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated gradient background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(270deg, #0a0015, #1a0033, #2d004d, #1a0033);
+            background-size: 800% 800%;
+            animation: gradientShift 20s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Fog/Mist Effect */
+        .fog {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        .fog::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200px;
+            bottom: 0;
+            left: -100%;
+            background: linear-gradient(to top, 
+                rgba(153, 51, 255, 0.05) 0%,
+                rgba(255, 102, 0, 0.02) 50%,
+                transparent 100%);
+            animation: fogDrift 40s infinite linear;
+        }
+
+        .fog::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 150px;
+            bottom: 100px;
+            left: -100%;
+            background: linear-gradient(to top, 
+                rgba(255, 255, 255, 0.02) 0%,
+                transparent 100%);
+            animation: fogDrift 60s infinite linear reverse;
+        }
+
+        @keyframes fogDrift {
+            from { transform: translateX(0); }
+            to { transform: translateX(50%); }
+        }
+
+        /* Complex Spider Web SVGs */
+        .spider-webs {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .web {
+            position: absolute;
+        }
+
+        .web-1 {
+            top: -50px;
+            left: -50px;
+            width: 400px;
+            height: 400px;
+            transform: rotate(15deg);
+            opacity: 0.3;
+        }
+
+        .web-2 {
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            transform: rotate(-30deg);
+            opacity: 0.25;
+        }
+
+        .web-3 {
+            bottom: 200px;
+            left: -150px;
+            width: 350px;
+            height: 350px;
+            transform: rotate(45deg);
+            opacity: 0.2;
+        }
+
+        .web-4 {
+            top: 50%;
+            right: -200px;
+            width: 450px;
+            height: 450px;
+            transform: rotate(-60deg);
+            opacity: 0.15;
+        }
+
+        /* Animated spiders on webs */
+        .spider {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            animation: crawlWeb 30s infinite linear;
+        }
+
+        @keyframes crawlWeb {
+            0% { 
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% { 
+                transform: translate(100px, 50px) rotate(90deg);
+            }
+            50% { 
+                transform: translate(150px, 150px) rotate(180deg);
+            }
+            75% { 
+                transform: translate(50px, 100px) rotate(270deg);
+            }
+            100% { 
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Hanging web strands */
+        .web-strands {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .strand {
+            position: absolute;
+            width: 1px;
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 100%);
+            transform-origin: top;
+            animation: strandSway 4s infinite ease-in-out;
+        }
+
+        .strand:nth-child(1) { left: 10%; height: 300px; animation-delay: 0s; top: -50px; }
+        .strand:nth-child(2) { left: 25%; height: 450px; animation-delay: 0.5s; top: -100px; }
+        .strand:nth-child(3) { left: 40%; height: 350px; animation-delay: 1s; top: -30px; }
+        .strand:nth-child(4) { left: 55%; height: 500px; animation-delay: 1.5s; top: -150px; }
+        .strand:nth-child(5) { left: 70%; height: 400px; animation-delay: 2s; top: -80px; }
+        .strand:nth-child(6) { left: 85%; height: 320px; animation-delay: 2.5s; top: -40px; }
+        .strand:nth-child(7) { left: 95%; height: 480px; animation-delay: 3s; top: -120px; }
+
+        @keyframes strandSway {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            75% { transform: rotate(-2deg); }
+        }
+
+        /* Moonlight */
+        .moon {
+            position: fixed;
+            top: 60px;
+            right: 120px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, 
+                #ffffee 0%, 
+                #ffffcc 30%, 
+                rgba(255, 255, 204, 0.4) 60%, 
+                transparent 100%);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 100px rgba(255, 255, 204, 0.6),
+                0 0 200px rgba(255, 255, 204, 0.3),
+                inset -20px -20px 30px rgba(200, 200, 150, 0.3);
+            z-index: 0;
+            animation: moonGlow 4s infinite ease-in-out;
+        }
+
+        @keyframes moonGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 100px rgba(255, 255, 204, 0.6),
+                    0 0 200px rgba(255, 255, 204, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 120px rgba(255, 255, 204, 0.8),
+                    0 0 250px rgba(255, 255, 204, 0.4);
+            }
+        }
+
+        /* Halloween creatures */
+        .creatures {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+            overflow: hidden;
+        }
+
+        .bat {
+            position: absolute;
+            font-size: 30px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+            opacity: 0.7;
+        }
+
+        .bat:nth-child(1) { 
+            top: 15%;
+            left: -50px;
+            animation: flyBat1 25s infinite linear;
+            font-size: 25px;
+        }
+        .bat:nth-child(2) { 
+            top: 35%;
+            left: -50px;
+            animation: flyBat2 30s infinite linear;
+            animation-delay: 8s;
+            font-size: 35px;
+        }
+        .bat:nth-child(3) { 
+            top: 55%;
+            left: -50px;
+            animation: flyBat3 22s infinite linear;
+            animation-delay: 15s;
+            font-size: 28px;
+        }
+
+        @keyframes flyBat1 {
+            0% { 
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.7;
+            }
+            25% {
+                transform: translate(30vw, -20px);
+            }
+            50% {
+                transform: translate(60vw, 20px);
+            }
+            75% {
+                transform: translate(90vw, -10px);
+            }
+            95% {
+                opacity: 0.7;
+            }
+            100% { 
+                transform: translate(calc(100vw + 100px), 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes flyBat2 {
+            0% { 
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.7;
+            }
+            30% {
+                transform: translate(40vw, 30px);
+            }
+            60% {
+                transform: translate(70vw, -25px);
+            }
+            95% {
+                opacity: 0.7;
+            }
+            100% { 
+                transform: translate(calc(100vw + 100px), 10px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes flyBat3 {
+            0% { 
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.7;
+            }
+            35% {
+                transform: translate(45vw, -30px);
+            }
+            70% {
+                transform: translate(80vw, 25px);
+            }
+            95% {
+                opacity: 0.7;
+            }
+            100% { 
+                transform: translate(calc(100vw + 100px), -10px);
+                opacity: 0;
+            }
+        }
+
+        .ghost {
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.3;
+            filter: blur(0.5px) drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+            animation: floatGhost 15s infinite ease-in-out;
+        }
+
+        .ghost:nth-child(4) { 
+            left: 10%; 
+            top: 30%;
+            animation-delay: 0s;
+        }
+        .ghost:nth-child(5) { 
+            right: 15%; 
+            top: 50%;
+            animation-delay: 5s;
+            animation-duration: 18s;
+        }
+        .ghost:nth-child(6) { 
+            left: 50%; 
+            bottom: 20%;
+            animation-delay: 10s;
+            animation-duration: 20s;
+        }
+
+        @keyframes floatGhost {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 0.3;
+            }
+            25% { 
+                transform: translate(30px, -40px) rotate(5deg) scale(1.1);
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translate(-20px, -60px) rotate(-5deg) scale(1);
+                opacity: 0.2;
+            }
+            75% { 
+                transform: translate(40px, -30px) rotate(3deg) scale(1.05);
+                opacity: 0.35;
+            }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Header styles */
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            position: relative;
+        }
+
+        .logo-container {
+            display: inline-block;
+            position: relative;
+            animation: pulse 2s infinite;
+            margin-bottom: 30px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.05) rotate(3deg); }
+        }
+
+        .main-logo {
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 0 50px rgba(255, 102, 0, 0.8),
+                0 0 100px rgba(255, 102, 0, 0.4),
+                0 0 150px rgba(255, 102, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .main-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .main-logo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(255, 102, 0, 0.1) 50%, 
+                transparent 70%);
+            animation: logoShine 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes logoShine {
+            0% { transform: rotate(0deg) translateX(-100%); }
+            100% { transform: rotate(360deg) translateX(100%); }
+        }
+
+        h1 {
+            font-family: 'Creepster', cursive;
+            font-size: 92px;
+            margin: 30px 0;
+            color: #ff6600;
+            text-shadow: 
+                0 1px 0 #ff8833,
+                0 2px 0 #ff7722,
+                0 3px 0 #ff6611,
+                0 4px 0 #ff5500,
+                0 5px 0 #ee4400,
+                0 6px 0 #dd3300,
+                0 7px 0 #cc2200,
+                0 8px 0 #bb1100,
+                0 9px 0 #aa0000,
+                0 10px 0 #990000,
+                0 0 5px rgba(255, 102, 0, 1),
+                0 0 10px rgba(255, 102, 0, 0.8),
+                0 0 15px rgba(255, 102, 0, 0.6),
+                0 0 20px rgba(255, 102, 0, 0.4),
+                0 0 30px rgba(255, 102, 0, 0.2),
+                0 10px 20px rgba(0, 0, 0, 0.8),
+                0 15px 30px rgba(0, 0, 0, 0.5);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            animation: titleFlame 2s ease-in-out infinite alternate;
+            position: relative;
+            transform: perspective(500px) rotateX(15deg);
+            filter: url(#drip);
+        }
+
+        /* Extra dripping elements */
+        h1::before {
+            content: 'TRICK OR TREAT COIN';
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #ff6600;
+            text-shadow: 
+                0 1px 0 #ff8833,
+                0 2px 0 #ff7722,
+                0 3px 0 #ff6611,
+                0 4px 0 #ff5500,
+                0 5px 0 #ee4400;
+            opacity: 0.8;
+            animation: dripAnimation 4s infinite;
+        }
+
+        @keyframes titleFlame {
+            0% { 
+                filter: url(#drip) brightness(1);
+                transform: perspective(500px) rotateX(15deg) translateY(0);
+            }
+            100% { 
+                filter: url(#drip) brightness(1.2);
+                transform: perspective(500px) rotateX(15deg) translateY(-2px);
+            }
+        }
+
+        @keyframes dripAnimation {
+            0%, 100% { 
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 95% 102%, 90% 100%, 85% 103%, 80% 100%, 75% 102%, 70% 100%, 65% 101%, 60% 100%, 55% 102%, 50% 100%, 45% 101%, 40% 100%, 35% 102%, 30% 100%, 25% 101%, 20% 100%, 15% 102%, 10% 100%, 5% 101%, 0 100%);
+            }
+            50% { 
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 97% 101%, 92% 100%, 87% 102%, 82% 100%, 77% 101%, 72% 100%, 67% 102%, 62% 100%, 57% 101%, 52% 100%, 47% 102%, 42% 100%, 37% 101%, 32% 100%, 27% 102%, 22% 100%, 17% 101%, 12% 100%, 7% 102%, 0 100%);
+            }
+        }
+
+        .tagline {
+            font-size: 28px;
+            color: #ffcc00;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(255, 204, 0, 0.5);
+            font-weight: 600;
+            margin-bottom: 10px;
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 204, 0, 0.5); }
+            50% { opacity: 0.9; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 204, 0, 0.7); }
+        }
+
+        .solana-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #00FFA3, #DC1FFF);
+            padding: 8px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 4px 20px rgba(0, 255, 163, 0.4);
+            animation: badgeGlow 2s infinite;
+        }
+
+        @keyframes badgeGlow {
+            0%, 100% { box-shadow: 0 4px 20px rgba(0, 255, 163, 0.4); }
+            50% { box-shadow: 0 6px 30px rgba(220, 31, 255, 0.6); }
+        }
+
+        /* Countdown section */
+        .countdown-section {
+            background: rgba(0, 0, 0, 0.7);
+            border: 3px solid transparent;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                linear-gradient(135deg, #ff6600, #9933ff, #ff6600);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            border-radius: 30px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 900px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .countdown-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .countdown-title {
+            font-family: 'Creepster', cursive;
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffcc00;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: linear-gradient(135deg, rgba(77, 0, 153, 0.8), rgba(51, 0, 102, 0.8));
+            border: 2px solid #ff6600;
+            border-radius: 20px;
+            padding: 25px;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                inset 0 0 20px rgba(255, 102, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-unit::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #ff6600, #9933ff, #ffcc00, #ff6600);
+            border-radius: 20px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s;
+        }
+
+        .time-unit:hover {
+            transform: translateY(-5px) scale(1.05);
+            border-color: #ffcc00;
+        }
+
+        .time-unit:hover::before {
+            opacity: 1;
+        }
+
+        .time-value {
+            font-size: 56px;
+            font-weight: bold;
+            color: #ff6600;
+            font-family: 'Courier New', monospace;
+            text-shadow: 
+                0 0 20px rgba(255, 102, 0, 0.8),
+                0 0 40px rgba(255, 102, 0, 0.4);
+            animation: numberPulse 1s infinite;
+        }
+
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .time-label {
+            font-size: 16px;
+            color: #ffcc00;
+            text-transform: uppercase;
+            margin-top: 10px;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* Prize pool */
+        .prize-pool {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0.1), rgba(153, 51, 255, 0.1));
+            border-radius: 25px;
+            border: 2px dashed #ff6600;
+            position: relative;
+            animation: poolFloat 3s infinite ease-in-out;
+        }
+
+        @keyframes poolFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .prize-amount {
+            font-size: 64px;
+            color: #ffcc00;
+            text-shadow: 
+                3px 3px 0 #000,
+                0 0 40px rgba(255, 204, 0, 0.8);
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            animation: prizeGlow 2s infinite;
+        }
+
+        @keyframes prizeGlow {
+            0%, 100% { 
+                text-shadow: 
+                    3px 3px 0 #000,
+                    0 0 40px rgba(255, 204, 0, 0.8);
+            }
+            50% { 
+                text-shadow: 
+                    3px 3px 0 #000,
+                    0 0 60px rgba(255, 204, 0, 1),
+                    0 0 80px rgba(255, 102, 0, 0.6);
+            }
+        }
+
+        /* Check treat section */
+        .check-treat {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(26, 0, 51, 0.8));
+            border: 3px solid #9933ff;
+            border-radius: 30px;
+            padding: 50px;
+            margin: 50px auto;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 
+                0 0 50px rgba(153, 51, 255, 0.5),
+                inset 0 0 50px rgba(153, 51, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .check-treat h2 {
+            font-family: 'Creepster', cursive;
+            font-size: 48px;
+            margin-bottom: 35px;
+            color: #ffcc00;
+            text-shadow: 
+                3px 3px 6px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(255, 204, 0, 0.6);
+            letter-spacing: 3px;
+        }
+
+        .address-input {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #ff6600;
+            border-radius: 15px;
+            color: #fff;
+            margin-bottom: 25px;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+
+        .address-input:focus {
+            outline: none;
+            border-color: #ffcc00;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 0 30px rgba(255, 204, 0, 0.5),
+                inset 0 0 10px rgba(255, 204, 0, 0.1);
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #ff6600, #ff9933);
+            color: #000;
+            border: none;
+            padding: 18px 60px;
+            font-size: 28px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-family: 'Creepster', cursive;
+            letter-spacing: 3px;
+            box-shadow: 
+                0 8px 30px rgba(255, 102, 0, 0.5),
+                inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .check-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .check-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 12px 40px rgba(255, 102, 0, 0.7),
+                inset 0 -3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .check-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Winners List Section */
+        .winners-list-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(51, 0, 102, 0.8));
+            border: 3px solid #ff6600;
+            border-radius: 30px;
+            padding: 50px;
+            margin: 50px auto;
+            max-width: 1000px;
+            box-shadow: 
+                0 0 50px rgba(255, 102, 0, 0.4),
+                inset 0 0 30px rgba(255, 102, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .winners-title {
+            font-family: 'Creepster', cursive;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 35px;
+            color: #ffcc00;
+            text-shadow: 
+                3px 3px 6px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(255, 204, 0, 0.6);
+            letter-spacing: 3px;
+            animation: flicker 3s infinite;
+        }
+
+        .round-selector {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .round-selector label {
+            font-size: 20px;
+            color: #ff6600;
+            margin-right: 15px;
+            font-weight: 600;
+        }
+
+        .round-dropdown {
+            padding: 12px 20px;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ff6600;
+            border-radius: 10px;
+            color: #ffcc00;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Courier New', monospace;
+        }
+
+        .round-dropdown:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #ffcc00;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+        }
+
+        .round-dropdown option {
+            background: #1a0033;
+            color: #ffcc00;
+        }
+
+        .winners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .winners-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .winners-grid::-webkit-scrollbar-track {
+            background: rgba(255, 102, 0, 0.1);
+            border-radius: 4px;
+        }
+
+        .winners-grid::-webkit-scrollbar-thumb {
+            background: #ff6600;
+            border-radius: 4px;
+        }
+
+        .winner-card {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .winner-card.treat-winner {
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .winner-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .winner-card.treat-winner:hover {
+            box-shadow: 0 5px 30px rgba(0, 255, 0, 0.4);
+        }
+
+        .winner-emoji {
+            font-size: 32px;
+        }
+
+        .winner-address {
+            flex: 1;
+            font-family: 'Courier New', monospace;
+            color: #ffcc00;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .winner-amount {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .treat-winner .winner-amount {
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+        }
+
+        .load-more-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #9933ff, #ff6600);
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(153, 51, 255, 0.4);
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(153, 51, 255, 0.6);
+            background: linear-gradient(135deg, #ff6600, #ffcc00);
+        }
+
+        /* Navigation */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 15px 35px;
+            background: rgba(255, 102, 0, 0.1);
+            border: 2px solid #ff6600;
+            border-radius: 30px;
+            color: #ffcc00;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 102, 0, 0.3);
+            transition: left 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 102, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 102, 0, 0.5);
+            border-color: #ffcc00;
+        }
+
+        .nav-btn:hover::before {
+            left: 0;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(51, 0, 102, 0.7));
+            border: 2px solid #9933ff;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(255, 102, 0, 0.1));
+            transition: top 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.05) translateY(-5px);
+            border-color: #ff6600;
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.4);
+        }
+
+        .stat-card:hover::before {
+            top: 0;
+        }
+
+        .stat-value {
+            font-size: 42px;
+            color: #ff6600;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.6);
+        }
+
+        .stat-label {
+            font-size: 18px;
+            color: #ffcc00;
+            margin-top: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-top: 2px solid rgba(255, 102, 0, 0.3);
+            margin-top: 100px;
+            color: #ffcc00;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 102, 0, 0.2);
+            border: 2px solid #ff6600;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff6600;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 24px;
+        }
+
+        .social-icon:hover {
+            background: #ff6600;
+            color: #000;
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.7);
+        }
+
+        /* Result Modal */
+        .result-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-content {
+            background: linear-gradient(135deg, #1a0033, #4d0099);
+            border: 5px solid #ff6600;
+            border-radius: 40px;
+            padding: 60px;
+            text-align: center;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 
+                0 0 100px rgba(255, 102, 0, 0.8),
+                inset 0 0 50px rgba(153, 51, 255, 0.2);
+            animation: modalAppear 0.5s;
+        }
+
+        @keyframes modalAppear {
+            from {
+                transform: scale(0.5) rotate(180deg);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .result-emoji {
+            font-size: 150px;
+            margin-bottom: 30px;
+            animation: emojiFloat 2s infinite ease-in-out;
+        }
+
+        @keyframes emojiFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(-10deg); }
+            75% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .result-text {
+            font-family: 'Creepster', cursive;
+            font-size: 56px;
+            color: #ffcc00;
+            margin-bottom: 25px;
+            text-shadow: 
+                3px 3px 6px rgba(0, 0, 0, 0.8),
+                0 0 40px currentColor;
+            letter-spacing: 4px;
+        }
+
+        .result-amount {
+            font-size: 42px;
+            color: #ff6600;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+        }
+
+        .close-modal {
+            margin-top: 40px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff6600, #ff9933);
+            border: none;
+            border-radius: 30px;
+            color: #000;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .close-modal:hover {
+            background: linear-gradient(135deg, #ff9933, #ffcc00);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 153, 51, 0.7);
+        }
+
+        /* Confetti animation */
+        .confetti {
+            position: fixed;
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            animation: confettiFall 3s linear;
+            z-index: 1001;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            h1 { font-size: 48px; }
+            .countdown-title { font-size: 32px; }
+            .time-value { font-size: 42px; }
+            .prize-amount { font-size: 48px; }
+            .check-treat h2 { font-size: 36px; }
+            .result-text { font-size: 42px; }
+            .web-1, .web-2 { width: 300px; height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Filters for dripping text effect -->
+    <svg class="svg-filters">
+        <defs>
+            <filter id="drip">
+                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="1" result="turbulence" seed="1" />
+                <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="8" xChannelSelector="R" yChannelSelector="G" />
+                <feGaussianBlur stdDeviation="0.5" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Complex Spider Web SVGs -->
+    <div class="spider-webs">
+        <svg class="web web-1" viewBox="0 0 400 400">
+            <defs>
+                <radialGradient id="webGradient1">
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0.1)"/>
+                </radialGradient>
+            </defs>
+            <!-- Radial threads -->
+            <g stroke="url(#webGradient1)" stroke-width="1" fill="none">
+                <line x1="200" y1="200" x2="200" y2="0" />
+                <line x1="200" y1="200" x2="283" y2="59" />
+                <line x1="200" y1="200" x2="400" y2="200" />
+                <line x1="200" y1="200" x2="283" y2="341" />
+                <line x1="200" y1="200" x2="200" y2="400" />
+                <line x1="200" y1="200" x2="117" y2="341" />
+                <line x1="200" y1="200" x2="0" y2="200" />
+                <line x1="200" y1="200" x2="117" y2="59" />
+            </g>
+            <!-- Spiral threads -->
+            <g stroke="url(#webGradient1)" stroke-width="0.8" fill="none">
+                <circle cx="200" cy="200" r="30" />
+                <circle cx="200" cy="200" r="60" />
+                <circle cx="200" cy="200" r="90" />
+                <circle cx="200" cy="200" r="120" />
+                <circle cx="200" cy="200" r="150" />
+                <circle cx="200" cy="200" r="180" />
+            </g>
+            <!-- Spider -->
+            <text x="220" y="180" font-size="30" class="spider">🕷️</text>
+        </svg>
+
+        <svg class="web web-2" viewBox="0 0 500 500">
+            <defs>
+                <radialGradient id="webGradient2">
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.3)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0.05)"/>
+                </radialGradient>
+            </defs>
+            <!-- Complex web pattern -->
+            <g stroke="url(#webGradient2)" stroke-width="1.2" fill="none">
+                <!-- Main radial lines -->
+                <path d="M250,250 L250,0 M250,250 L354,104 M250,250 L500,250 M250,250 L354,396 
+                         M250,250 L250,500 M250,250 L146,396 M250,250 L0,250 M250,250 L146,104" />
+                <!-- Concentric polygons -->
+                <polygon points="250,200 280,220 280,280 250,300 220,280 220,220" />
+                <polygon points="250,150 320,190 320,310 250,350 180,310 180,190" />
+                <polygon points="250,100 360,160 360,340 250,400 140,340 140,160" />
+                <polygon points="250,50 400,130 400,370 250,450 100,370 100,130" />
+            </g>
+            <!-- Dewdrops -->
+            <circle cx="320" cy="190" r="3" fill="rgba(255,255,255,0.6)" />
+            <circle cx="180" cy="310" r="2" fill="rgba(255,255,255,0.5)" />
+            <circle cx="250" cy="350" r="3" fill="rgba(255,255,255,0.6)" />
+        </svg>
+
+        <svg class="web web-3" viewBox="0 0 350 350">
+            <defs>
+                <linearGradient id="webGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.3)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0.1)"/>
+                </linearGradient>
+            </defs>
+            <!-- Irregular web -->
+            <g stroke="url(#webGradient3)" stroke-width="0.8" fill="none">
+                <path d="M175,175 L175,20 M175,175 L280,70 M175,175 L330,175 
+                         M175,175 L280,280 M175,175 L175,330 M175,175 L70,280 
+                         M175,175 L20,175 M175,175 L70,70" />
+                <!-- Irregular spiral -->
+                <path d="M175,155 Q195,155 195,175 T175,195 Q155,195 155,175 T175,155" />
+                <path d="M175,135 Q215,135 215,175 T175,215 Q135,215 135,175 T175,135" />
+                <path d="M175,115 Q235,115 235,175 T175,235 Q115,235 115,175 T175,115" />
+            </g>
+        </svg>
+
+        <svg class="web web-4" viewBox="0 0 450 450">
+            <defs>
+                <radialGradient id="webGradient4">
+                    <stop offset="0%" stop-color="rgba(255,255,255,0.2)"/>
+                    <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                </radialGradient>
+            </defs>
+            <!-- Broken web effect -->
+            <g stroke="url(#webGradient4)" stroke-width="1" fill="none" stroke-dasharray="10,5">
+                <line x1="225" y1="225" x2="225" y2="0" />
+                <line x1="225" y1="225" x2="450" y2="225" />
+                <line x1="225" y1="225" x2="225" y2="450" />
+                <line x1="225" y1="225" x2="0" y2="225" />
+                <path d="M225,125 Q325,225 225,325 Q125,225 225,125" />
+                <circle cx="225" cy="225" r="75" stroke-dasharray="20,10" />
+                <circle cx="225" cy="225" r="150" stroke-dasharray="15,8" />
+            </g>
+        </svg>
+    </div>
+
+    <!-- Hanging web strands -->
+    <div class="web-strands">
+        <div class="strand"></div>
+        <div class="strand"></div>
+        <div class="strand"></div>
+        <div class="strand"></div>
+        <div class="strand"></div>
+        <div class="strand"></div>
+        <div class="strand"></div>
+    </div>
+
+    <!-- Fog effect -->
+    <div class="fog"></div>
+
+    <!-- Moon -->
+    <div class="moon"></div>
+
+    <!-- Halloween Creatures -->
+    <div class="creatures">
+        <div class="bat">🦇</div>
+        <div class="bat">🦇</div>
+        <div class="bat">🦇</div>
+        <div class="ghost">👻</div>
+        <div class="ghost">👻</div>
+        <div class="ghost">👻</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="main-logo">
+                    <img src="treat.jpg" alt="$TOT Coin Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='🎃';">
+                </div>
+            </div>
+            <h1>TRICK OR TREAT COIN</h1>
+            <p class="tagline">50% Treat, 50% Trick - Every Day is Halloween! 🎃</p>
+        </header>
+
+        <nav class="navigation">
+            <a href="#" class="nav-btn">🚀 Buy $TOT</a>
+            <a href="#" class="nav-btn">📊 View on Pump.fun</a>
+        </nav>
+
+        <div class="countdown-section">
+            <h2 class="countdown-title">⏰ Next Treat Distribution In:</h2>
+            <div class="countdown">
+                <div class="time-unit">
+                    <div class="time-value" id="hours">00</div>
+                    <div class="time-label">Hours</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="minutes">00</div>
+                    <div class="time-label">Minutes</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="seconds">00</div>
+                    <div class="time-label">Seconds</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prize-pool">
+            <h3 style="font-size: 36px; margin-bottom: 20px; color: #ff6600; font-family: 'Creepster', cursive;">
+                🍬 Current Prize Pool 🍬
+            </h3>
+            <div class="prize-amount">24,847 $TOT</div>
+            <p style="font-size: 20px; color: #ffcc00; margin-top: 15px;">
+                (~$12,423.50 USD)
+            </p>
+        </div>
+
+        <div class="check-treat">
+            <h2>🎲 Check Your Luck 🎲</h2>
+            <input type="text" 
+                   class="address-input" 
+                   placeholder="Enter your Solana wallet address" 
+                   id="walletAddress">
+            <button class="check-btn" onclick="checkTreat()">
+                Did I Get a Treat?
+            </button>
+        </div>
+
+        <!-- Winners List Section -->
+        <div class="winners-list-section">
+            <h2 class="winners-title">🏆 View Winners List 🏆</h2>
+            <div class="winners-container">
+                <div class="round-selector">
+                    <label for="roundSelect">Select Round:</label>
+                    <select id="roundSelect" class="round-dropdown">
+                        <option value="current">Current Round (#12)</option>
+                        <option value="11">Round #11</option>
+                        <option value="10">Round #10</option>
+                        <option value="9">Round #9</option>
+                        <option value="8">Round #8</option>
+                    </select>
+                </div>
+                <div class="winners-grid" id="winnersGrid">
+                    <div class="winner-card treat-winner">
+                        <span class="winner-emoji">🍬</span>
+                        <span class="winner-address">7xKp...9mNq</span>
+                        <span class="winner-amount">+892.3 $TOT</span>
+                    </div>
+                    <div class="winner-card treat-winner">
+                        <span class="winner-emoji">🍬</span>
+                        <span class="winner-address">3bRt...4kLp</span>
+                        <span class="winner-amount">+892.3 $TOT</span>
+                    </div>
+                    <div class="winner-card treat-winner">
+                        <span class="winner-emoji">🍬</span>
+                        <span class="winner-address">9mXy...2wQr</span>
+                        <span class="winner-amount">+892.3 $TOT</span>
+                    </div>
+                    <div class="winner-card treat-winner">
+                        <span class="winner-emoji">🍬</span>
+                        <span class="winner-address">5pNk...8jHt</span>
+                        <span class="winner-amount">+892.3 $TOT</span>
+                    </div>
+                    <div class="winner-card treat-winner">
+                        <span class="winner-emoji">🍬</span>
+                        <span class="winner-address">2qWe...7yUi</span>
+                        <span class="winner-amount">+892.3 $TOT</span>
+                    </div>
+                    <div class="winner-card treat-winner">
+                        <span class="winner-emoji">🍬</span>
+                        <span class="winner-address">8kLm...3rTy</span>
+                        <span class="winner-amount">+892.3 $TOT</span>
+                    </div>
+                </div>
+                <button class="load-more-btn" onclick="loadMoreWinners()">Load More Winners</button>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">1,247</div>
+                <div class="stat-label">Total Holders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">623</div>
+                <div class="stat-label">Today's Winners</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">847.2</div>
+                <div class="stat-label">Avg Treat ($TOT)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Rounds Complete</div>
+            </div>
+        </div>
+
+        <footer>
+            <p style="font-size: 18px; margin-bottom: 10px;">
+                &copy; 2025 $TOT - Trick or Treat Coin
+            </p>
+            <p style="font-size: 16px; opacity: 0.8;">
+                Built on Solana | Not Financial Advice | DYOR
+            </p>
+            <div class="social-links">
+                <a href="#" class="social-icon">𝕏</a>
+                <a href="#" class="social-icon">💬</a>
+                <a href="#" class="social-icon">📱</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Result Modal -->
+    <div class="result-modal" id="resultModal">
+        <div class="result-content">
+            <div class="result-emoji" id="resultEmoji">🎃</div>
+            <div class="result-text" id="resultText">TREAT!</div>
+            <div class="result-amount" id="resultAmount">You won 523.7 $TOT!</div>
+            <button class="close-modal" onclick="closeModal()">Awesome!</button>
+        </div>
+    </div>
+
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const nextDistribution = new Date(now);
+            
+            // Set next distribution time (every 2 hours)
+            const hours = now.getHours();
+            const nextHour = Math.ceil(hours / 2) * 2;
+            
+            if (nextHour > hours) {
+                nextDistribution.setHours(nextHour, 0, 0, 0);
+            } else {
+                nextDistribution.setDate(nextDistribution.getDate() + 1);
+                nextDistribution.setHours(0, 0, 0, 0);
+            }
+            
+            const timeLeft = nextDistribution - now;
+            
+            const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsLeft = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('hours').textContent = String(hoursLeft).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutesLeft).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(secondsLeft).padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Check Treat Function
+        function checkTreat() {
+            const address = document.getElementById('walletAddress').value;
+            
+            if (!address) {
+                alert('Please enter your Solana wallet address!');
+                return;
+            }
+            
+            // Basic Solana address validation
+            if (!address.match(/^[1-9A-HJ-NP-Za-km-z]{32,44}$/)) {
+                alert('Please enter a valid Solana address!');
+                return;
+            }
+
+            // Simulate random treat/trick (50/50)
+            const isTreat = Math.random() < 0.5;
+            const modal = document.getElementById('resultModal');
+            const emoji = document.getElementById('resultEmoji');
+            const text = document.getElementById('resultText');
+            const amount = document.getElementById('resultAmount');
+
+            if (isTreat) {
+                emoji.textContent = '🍬';
+                emoji.style.color = '#00ff00';
+                text.textContent = 'TREAT!';
+                text.style.color = '#00ff00';
+                const randomAmount = (Math.random() * 1000 + 100).toFixed(1);
+                amount.textContent = `You won ${randomAmount} $TOT!`;
+                amount.style.display = 'block';
+                createConfetti();
+            } else {
+                emoji.textContent = '💀';
+                emoji.style.color = '#ff0000';
+                text.textContent = 'TRICK!';
+                text.style.color = '#ff0000';
+                amount.textContent = 'Better luck next round! 🎃';
+                amount.style.display = 'block';
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('resultModal').style.display = 'none';
+        }
+
+        // Confetti Effect
+        function createConfetti() {
+            const colors = ['#ff6600', '#ffcc00', '#9933ff', '#00ff00', '#ff00ff', '#00ffff'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = confetti.style.width;
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 20);
+            }
+        }
+
+        // Click outside modal to close
+        window.onclick = function(event) {
+            const modal = document.getElementById('resultModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Animated prize pool update
+        setInterval(() => {
+            const prizeElement = document.querySelector('.prize-amount');
+            const currentValue = parseInt(prizeElement.textContent.replace(/[^0-9]/g, ''));
+            const change = Math.floor(Math.random() * 200 - 50);
+            const newValue = Math.max(0, currentValue + change);
+            prizeElement.textContent = newValue.toLocaleString() + ' $TOT';
+        }, 5000);
+
+        // Dynamic spider movement on webs
+        document.querySelectorAll('.spider').forEach(spider => {
+            setInterval(() => {
+                const x = Math.random() * 50 - 25;
+                const y = Math.random() * 50 - 25;
+                spider.style.transform = `translate(${x}px, ${y}px)`;
+            }, 3000);
+        });
+
+        // Winners List Functions
+        function loadMoreWinners() {
+            const grid = document.getElementById('winnersGrid');
+            const newWinners = [
+                { address: '6tRe...9kLm', amount: '+892.3 $TOT' },
+                { address: '4yUi...2wQe', amount: '+765.1 $TOT' },
+                { address: '8jHt...5pNk', amount: '+892.3 $TOT' },
+                { address: '3rTy...8kLm', amount: '+1024.5 $TOT' },
+                { address: '1aZx...6bNm', amount: '+892.3 $TOT' },
+                { address: '9qWe...4rTy', amount: '+654.8 $TOT' }
+            ];
+
+            newWinners.forEach((winner, index) => {
+                setTimeout(() => {
+                    const card = document.createElement('div');
+                    card.className = 'winner-card treat-winner';
+                    card.style.opacity = '0';
+                    card.innerHTML = `
+                        <span class="winner-emoji">🍬</span>
+                        <span class="winner-address">${winner.address}</span>
+                        <span class="winner-amount">${winner.amount}</span>
+                    `;
+                    grid.appendChild(card);
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.5s';
+                        card.style.opacity = '1';
+                    }, 50);
+                }, index * 100);
+            });
+        }
+
+        // Round selector change handler
+        document.getElementById('roundSelect').addEventListener('change', function(e) {
+            const grid = document.getElementById('winnersGrid');
+            grid.style.opacity = '0.5';
+            
+            setTimeout(() => {
+                // Simulate loading different round data
+                grid.innerHTML = '';
+                const roundData = generateRoundData(e.target.value);
+                
+                roundData.forEach((winner, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'winner-card treat-winner';
+                    card.innerHTML = `
+                        <span class="winner-emoji">🍬</span>
+                        <span class="winner-address">${winner.address}</span>
+                        <span class="winner-amount">${winner.amount}</span>
+                    `;
+                    grid.appendChild(card);
+                });
+                
+                grid.style.opacity = '1';
+            }, 300);
+        });
+
+        function generateRoundData(round) {
+            const addresses = [
+                '7xKp...9mNq', '3bRt...4kLp', '9mXy...2wQr', '5pNk...8jHt',
+                '2qWe...7yUi', '8kLm...3rTy', '6tRe...9kLm', '4yUi...2wQe',
+                '1aZx...6bNm', '9qWe...4rTy', '5mNb...3kLp', '7yTr...1wQe'
+            ];
+            
+            // Only return treat winners
+            const numWinners = Math.floor(Math.random() * 4) + 6; // 6-9 winners shown
+            return addresses.slice(0, numWinners).map(address => ({
+                address: address,
+                amount: `+${(Math.random() * 1000 + 500).toFixed(1)} $TOT`
+            }));
+        }
+    </script>
+</body>
+</html>
