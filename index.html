@@ -1813,6 +1813,7 @@
             const emoji = document.getElementById('resultEmoji');
             const text = document.getElementById('resultText');
             const amount = document.getElementById('resultAmount');
+            const closeBtn = document.querySelector('.close-modal');
 
             if (isTreat) {
                 emoji.textContent = '🍬';
@@ -1822,6 +1823,7 @@
                 const randomAmount = (Math.random() * 1000 + 100).toFixed(1);
                 amount.textContent = `You won ${randomAmount} $TOT!`;
                 amount.style.display = 'block';
+                closeBtn.textContent = 'Awesome!';
                 createConfetti();
             } else {
                 emoji.textContent = '💀';
@@ -1830,6 +1832,7 @@
                 text.style.color = '#ff0000';
                 amount.textContent = 'Better luck next round! 🎃';
                 amount.style.display = 'block';
+                closeBtn.textContent = 'Return';
             }
 
             modal.style.display = 'flex';
