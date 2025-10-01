@@ -331,43 +331,55 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            animation: pulse 2s infinite;
             margin: 0 auto 30px auto;
             width: 250px;
             height: 250px;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.05) rotate(3deg); }
-        }
-
         .main-logo {
             width: 250px;
             height: 250px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 
-                0 0 50px rgba(255, 102, 0, 0.8),
-                0 0 100px rgba(255, 102, 0, 0.4),
-                0 0 150px rgba(255, 102, 0, 0.2);
             position: relative;
-            overflow: hidden;
-            background: #0a0015;  /* Dark background to match site */
             margin: 0 auto;
+            background: transparent;  /* Transparent background */
+            border-radius: 0;  /* No border radius */
+            overflow: visible;  /* Allow glow to extend beyond */
         }
 
         .main-logo img {
-            width: 80%;  /* Make candy smaller to fit nicely */
-            height: 80%;
-            object-fit: contain;  /* Changed from cover to contain */
-            border-radius: 0;  /* Remove border radius from image */
+            width: 100%;
+            height: auto;
+            object-fit: contain;
             display: block;
             position: relative;
             z-index: 2;
-            filter: drop-shadow(0 0 10px rgba(255, 102, 0, 0.5));  /* Add glow to candy */
+            /* Glow effect on the image itself */
+            filter: drop-shadow(0 0 30px rgba(255, 102, 0, 0.8))
+                    drop-shadow(0 0 60px rgba(255, 102, 0, 0.5))
+                    drop-shadow(0 0 90px rgba(255, 102, 0, 0.3));
+            animation: candyGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes candyGlow {
+            0% {
+                filter: drop-shadow(0 0 30px rgba(255, 102, 0, 0.8))
+                        drop-shadow(0 0 60px rgba(255, 102, 0, 0.5))
+                        drop-shadow(0 0 90px rgba(255, 102, 0, 0.3));
+                transform: scale(1);
+            }
+            100% {
+                filter: drop-shadow(0 0 40px rgba(255, 102, 0, 1))
+                        drop-shadow(0 0 80px rgba(255, 102, 0, 0.7))
+                        drop-shadow(0 0 120px rgba(255, 102, 0, 0.4));
+                transform: scale(1.05);
+            }
+        }
+
+        .main-logo::before {
+            display: none;  /* Remove the shine effect */
         }
 
         .main-logo::before {
