@@ -1198,20 +1198,29 @@
         /* Candy Rain Effect */
         .candy-rain {
             position: fixed;
-            font-size: 30px;
-            z-index: 1000;
+            font-size: 35px;
+            z-index: 999;
             pointer-events: none;
-            animation: candyFall 4s linear;
+            animation: candyFall 3s linear forwards;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
         }
 
         @keyframes candyFall {
             0% {
-                transform: translateY(-100px) rotate(0deg);
+                transform: translateY(-150px) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                transform: translateY(-50px) rotate(36deg) scale(1);
+                opacity: 1;
+            }
+            90% {
+                transform: translateY(calc(100vh - 100px)) rotate(324deg) scale(1);
                 opacity: 1;
             }
             100% {
-                transform: translateY(calc(100vh + 100px)) rotate(360deg);
-                opacity: 0.8;
+                transform: translateY(100vh) rotate(360deg) scale(1);
+                opacity: 0;
             }
         }
 
@@ -1853,12 +1862,22 @@
 
         // Candy Rain Function
         function triggerCandyRain() {
-            const candyEmojis = ['🍬', '🍭', '🍫', '🧁', '🍪', '🍩', '🎃'];
-            const duration = 5000; // 5 seconds of candy rain
-            const interval = 100; // New candy every 100ms
+            console.log('Triggering candy rain!'); // Debug log
+            const candyEmojis = ['🍬', '🍭', '🍫', '🧁', '🍪', '🍩', '🎃', '🍮', '🧈', '🍰'];
+            const duration = 6000; // 6 seconds of candy rain
+            const interval = 50; // New candy every 50ms for more density
             
+            // Create many candies immediately
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    createFallingCandy(candyEmojis);
+                }, i * 100);
+            }
+            
+            // Continue creating candies
             const rainInterval = setInterval(() => {
                 createFallingCandy(candyEmojis);
+                createFallingCandy(candyEmojis); // Create 2 at a time
             }, interval);
             
             // Stop after duration
@@ -1872,14 +1891,15 @@
             candy.className = 'candy-rain';
             candy.textContent = candyEmojis[Math.floor(Math.random() * candyEmojis.length)];
             candy.style.left = Math.random() * 100 + '%';
-            candy.style.animationDuration = (Math.random() * 2 + 3) + 's';
-            candy.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            candy.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            candy.style.fontSize = (Math.random() * 30 + 25) + 'px';
+            candy.style.zIndex = '999';
             document.body.appendChild(candy);
             
             // Remove candy after animation
-            setTimeout(() => {
+            candy.addEventListener('animationend', () => {
                 candy.remove();
-            }, 5000);
+            });
         }
 
         function showDistributionBanner() {
