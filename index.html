@@ -1205,6 +1205,271 @@
             .result-text { font-size: 42px; }
             .web-1, .web-2 { width: 300px; height: 300px; }
         }
+
+        /* Enhanced Mobile Responsiveness - Only affects mobile, not desktop */
+        @media only screen and (max-width: 768px) {
+            /* Adjust container padding for mobile */
+            .container {
+                padding: 10px;
+            }
+
+            /* Scale down the logo for mobile */
+            .logo-container {
+                width: 300px !important;
+                height: 300px !important;
+            }
+
+            .main-logo {
+                width: 300px !important;
+                height: 300px !important;
+            }
+
+            .main-logo img {
+                max-width: 300px !important;
+            }
+
+            /* Adjust title for mobile */
+            h1 {
+                font-size: 48px !important;
+                letter-spacing: 2px !important;
+                margin: 5px 0 20px 0 !important;
+                text-shadow: 
+                    /* 3D stacked effect - reduced for mobile */
+                    0 2px 0 #ff5500,
+                    0 4px 0 #ee4400,
+                    0 6px 0 #dd3300,
+                    0 8px 0 #cc2200,
+                    0 10px 0 #990000,
+                    /* Subtle glow */
+                    0 0 20px rgba(255, 102, 0, 0.5),
+                    0 15px 25px rgba(0, 0, 0, 0.8) !important;
+            }
+
+            /* Adjust tagline */
+            .tagline {
+                font-size: 18px !important;
+                padding: 0 20px;
+            }
+
+            /* Navigation buttons */
+            .navigation {
+                gap: 15px !important;
+            }
+
+            .nav-btn {
+                padding: 10px 20px !important;
+                font-size: 14px !important;
+            }
+
+            /* Countdown section */
+            .countdown-section {
+                padding: 25px 15px !important;
+                margin: 20px auto !important;
+            }
+
+            .countdown-title {
+                font-size: 28px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .countdown {
+                gap: 15px !important;
+            }
+
+            .time-unit {
+                min-width: 80px !important;
+                padding: 15px 10px !important;
+            }
+
+            .time-value {
+                font-size: 36px !important;
+            }
+
+            .time-label {
+                font-size: 12px !important;
+            }
+
+            /* Prize pool */
+            .prize-pool {
+                padding: 20px 15px !important;
+                margin: 30px 10px !important;
+            }
+
+            .prize-pool h3 {
+                font-size: 24px !important;
+            }
+
+            .prize-amount {
+                font-size: 36px !important;
+            }
+
+            /* Check treat section */
+            .check-treat {
+                padding: 30px 20px !important;
+                margin: 30px 10px !important;
+            }
+
+            .check-treat h2 {
+                font-size: 32px !important;
+                margin-bottom: 25px !important;
+            }
+
+            .address-input {
+                font-size: 14px !important;
+                padding: 12px !important;
+            }
+
+            .check-btn {
+                font-size: 20px !important;
+                padding: 12px 40px !important;
+            }
+
+            /* Winners list section */
+            .winners-list-section {
+                padding: 30px 20px !important;
+                margin: 30px 10px !important;
+            }
+
+            .winners-title {
+                font-size: 32px !important;
+            }
+
+            .round-dropdown {
+                font-size: 14px !important;
+                padding: 8px 15px !important;
+            }
+
+            .winners-grid {
+                grid-template-columns: 1fr !important;
+                max-height: 400px !important;
+            }
+
+            .winner-card {
+                padding: 15px !important;
+            }
+
+            /* Stats grid */
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px !important;
+                margin: 30px 0 !important;
+            }
+
+            .stat-card {
+                padding: 20px !important;
+            }
+
+            .stat-value {
+                font-size: 28px !important;
+            }
+
+            .stat-label {
+                font-size: 14px !important;
+            }
+
+            /* Spider webs - scale down for mobile */
+            .web-1 {
+                width: 200px !important;
+                height: 200px !important;
+            }
+
+            .web-2 {
+                width: 250px !important;
+                height: 250px !important;
+                right: -100px !important;
+            }
+
+            .web-3 {
+                width: 180px !important;
+                height: 180px !important;
+            }
+
+            .web-4 {
+                display: none !important; /* Hide on mobile */
+            }
+
+            /* Reduce ghosts on mobile */
+            .ghost:nth-child(4),
+            .ghost:nth-child(5) {
+                display: none !important;
+            }
+
+            /* Result modal */
+            .result-content {
+                padding: 40px 20px !important;
+                width: 90% !important;
+                max-width: 350px !important;
+            }
+
+            .result-emoji {
+                font-size: 100px !important;
+            }
+
+            .result-text {
+                font-size: 36px !important;
+            }
+
+            .result-amount {
+                font-size: 28px !important;
+            }
+
+            /* Footer */
+            footer {
+                padding: 40px 20px 30px !important;
+                margin-top: 60px !important;
+            }
+
+            footer p {
+                font-size: 14px !important;
+            }
+
+            /* Moon - smaller on mobile */
+            .moon {
+                width: 60px !important;
+                height: 60px !important;
+                top: 40px !important;
+                right: 40px !important;
+            }
+
+            /* Hide web strands on mobile */
+            .web-strands {
+                display: none !important;
+            }
+
+            /* Header padding adjustment */
+            header {
+                padding: 40px 10px 30px !important;
+            }
+        }
+
+        /* Extra small devices (phones in portrait) */
+        @media only screen and (max-width: 480px) {
+            .logo-container {
+                width: 250px !important;
+                height: 250px !important;
+            }
+
+            .main-logo {
+                width: 250px !important;
+                height: 250px !important;
+            }
+
+            .main-logo img {
+                max-width: 250px !important;
+            }
+
+            h1 {
+                font-size: 36px !important;
+            }
+
+            .tagline {
+                font-size: 16px !important;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1335,7 +1600,7 @@
         <header>
             <div class="logo-container">
                 <div class="main-logo">
-                    <img src="treatsym.png" alt="$TOT Coin Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='🎃';">
+                    <img src="treat.png" alt="$TOT Coin Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='🎃';">
                 </div>
             </div>
             <h1>TRICK OR TREAT COIN</h1>
@@ -1678,4 +1943,3 @@
     </script>
 </body>
 </html>
-
