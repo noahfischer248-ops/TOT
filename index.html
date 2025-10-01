@@ -440,28 +440,22 @@
             margin: 10px 0 30px 0;
             color: #ff6600;
             text-shadow: 
-                /* Thick black outline - all directions */
-                -5px -5px 0 #000,
-                5px -5px 0 #000,
-                -5px 5px 0 #000,
-                5px 5px 0 #000,
-                -5px 0 0 #000,
-                5px 0 0 #000,
-                0 -5px 0 #000,
-                0 5px 0 #000,
-                /* Diagonal fills for complete coverage */
-                -3px -3px 0 #000,
-                3px -3px 0 #000,
-                -3px 3px 0 #000,
-                3px 3px 0 #000,
-                /* Small 3D depth after outline */
-                0 8px 0 #990000,
-                /* Glow */
-                0 0 30px rgba(255, 102, 0, 0.8),
-                0 0 60px rgba(255, 102, 0, 0.4);
+                /* 3D stacked effect */
+                0 2px 0 #ff5500,
+                0 4px 0 #ee4400,
+                0 6px 0 #dd3300,
+                0 8px 0 #cc2200,
+                0 10px 0 #bb1100,
+                0 12px 0 #aa0000,
+                0 14px 0 #990000,
+                0 16px 0 #880000,
+                0 18px 0 #770000,
+                /* Subtle glow - not too bright */
+                0 0 20px rgba(255, 102, 0, 0.5),
+                0 20px 30px rgba(0, 0, 0, 0.8);
             letter-spacing: 6px;
             text-transform: uppercase;
-            animation: titleGlow 2s ease-in-out infinite alternate;
+            animation: titlePulse 3s ease-in-out infinite alternate;
             position: relative;
             display: block;
             font-weight: bold;
@@ -470,50 +464,41 @@
             line-height: 1;
         }
 
-        @keyframes titleGlow {
+        @keyframes titlePulse {
             0% { 
-                opacity: 1;
                 text-shadow: 
-                    /* Thick black outline */
-                    -5px -5px 0 #000,
-                    5px -5px 0 #000,
-                    -5px 5px 0 #000,
-                    5px 5px 0 #000,
-                    -5px 0 0 #000,
-                    5px 0 0 #000,
-                    0 -5px 0 #000,
-                    0 5px 0 #000,
-                    -3px -3px 0 #000,
-                    3px -3px 0 #000,
-                    -3px 3px 0 #000,
-                    3px 3px 0 #000,
-                    /* 3D depth */
-                    0 8px 0 #990000,
-                    /* Glow */
-                    0 0 30px rgba(255, 102, 0, 0.8),
-                    0 0 60px rgba(255, 102, 0, 0.4);
+                    /* 3D stacked effect */
+                    0 2px 0 #ff5500,
+                    0 4px 0 #ee4400,
+                    0 6px 0 #dd3300,
+                    0 8px 0 #cc2200,
+                    0 10px 0 #bb1100,
+                    0 12px 0 #aa0000,
+                    0 14px 0 #990000,
+                    0 16px 0 #880000,
+                    0 18px 0 #770000,
+                    /* Subtle glow */
+                    0 0 20px rgba(255, 102, 0, 0.5),
+                    0 20px 30px rgba(0, 0, 0, 0.8);
+                transform: translateY(0) scale(1);
             }
             100% { 
-                opacity: 1;
                 text-shadow: 
-                    /* Thick black outline */
-                    -5px -5px 0 #000,
-                    5px -5px 0 #000,
-                    -5px 5px 0 #000,
-                    5px 5px 0 #000,
-                    -5px 0 0 #000,
-                    5px 0 0 #000,
-                    0 -5px 0 #000,
-                    0 5px 0 #000,
-                    -3px -3px 0 #000,
-                    3px -3px 0 #000,
-                    -3px 3px 0 #000,
-                    3px 3px 0 #000,
-                    /* 3D depth */
-                    0 8px 0 #990000,
-                    /* Brighter glow */
-                    0 0 40px rgba(255, 102, 0, 1),
-                    0 0 80px rgba(255, 102, 0, 0.6);
+                    /* 3D stacked effect */
+                    0 2px 0 #ff5500,
+                    0 4px 0 #ee4400,
+                    0 6px 0 #dd3300,
+                    0 8px 0 #cc2200,
+                    0 10px 0 #bb1100,
+                    0 12px 0 #aa0000,
+                    0 14px 0 #990000,
+                    0 16px 0 #880000,
+                    0 18px 0 #770000,
+                    0 20px 0 #660000,
+                    /* Slightly brighter but not overwhelming */
+                    0 0 30px rgba(255, 102, 0, 0.6),
+                    0 22px 35px rgba(0, 0, 0, 0.9);
+                transform: translateY(-2px) scale(1.01);
             }
         }
 
