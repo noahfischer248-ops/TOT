@@ -355,16 +355,19 @@
                 0 0 150px rgba(255, 102, 0, 0.2);
             position: relative;
             overflow: hidden;
-            background: radial-gradient(circle at 30% 30%, #ff9933, #ff6600, #cc4400);
+            background: #0a0015;  /* Dark background to match site */
             margin: 0 auto;
         }
 
         .main-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
+            width: 80%;  /* Make candy smaller to fit nicely */
+            height: 80%;
+            object-fit: contain;  /* Changed from cover to contain */
+            border-radius: 0;  /* Remove border radius from image */
             display: block;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 0 10px rgba(255, 102, 0, 0.5));  /* Add glow to candy */
         }
 
         .main-logo::before {
