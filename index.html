@@ -326,14 +326,14 @@
         .logo-container {
             display: block;
             margin: 0 auto 10px auto;
-            width: 400px;
-            height: 400px;
+            width: 550px;
+            height: 550px;
             position: relative;
         }
 
         .main-logo {
-            width: 400px;
-            height: 400px;
+            width: 550px;
+            height: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -382,30 +382,30 @@
         .main-logo img {
             width: 100%;
             height: auto;
-            max-width: 400px;
+            max-width: 550px;
             object-fit: contain;
             display: block;
             position: relative;
             z-index: 2;
-            /* Glow effect on the image itself */
-            filter: drop-shadow(0 0 30px rgba(255, 102, 0, 0.8))
-                    drop-shadow(0 0 60px rgba(255, 102, 0, 0.5))
-                    drop-shadow(0 0 90px rgba(255, 102, 0, 0.3));
+            /* Enhanced glow effect on the image itself */
+            filter: drop-shadow(0 0 40px rgba(255, 102, 0, 0.9))
+                    drop-shadow(0 0 80px rgba(255, 102, 0, 0.6))
+                    drop-shadow(0 0 120px rgba(255, 102, 0, 0.3));
             animation: candyGlow 2s ease-in-out infinite alternate;
         }
 
         @keyframes candyGlow {
             0% {
-                filter: drop-shadow(0 0 30px rgba(255, 102, 0, 0.8))
-                        drop-shadow(0 0 60px rgba(255, 102, 0, 0.5))
-                        drop-shadow(0 0 90px rgba(255, 102, 0, 0.3));
+                filter: drop-shadow(0 0 40px rgba(255, 102, 0, 0.9))
+                        drop-shadow(0 0 80px rgba(255, 102, 0, 0.6))
+                        drop-shadow(0 0 120px rgba(255, 102, 0, 0.3));
                 transform: scale(1);
             }
             100% {
-                filter: drop-shadow(0 0 40px rgba(255, 102, 0, 1))
-                        drop-shadow(0 0 80px rgba(255, 102, 0, 0.7))
-                        drop-shadow(0 0 120px rgba(255, 102, 0, 0.4));
-                transform: scale(1.05);
+                filter: drop-shadow(0 0 50px rgba(255, 102, 0, 1))
+                        drop-shadow(0 0 100px rgba(255, 102, 0, 0.7))
+                        drop-shadow(0 0 150px rgba(255, 102, 0, 0.4));
+                transform: scale(1.02);
             }
         }
 
@@ -1678,5 +1678,3 @@
     </script>
 </body>
 </html>
-
-
